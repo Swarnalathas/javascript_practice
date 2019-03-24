@@ -23,12 +23,13 @@ describe("capitalize", () => {
   test("capitalizes the first character if the string is a sentence", () => {
     expect(capitalize("the quick fox")).toBe("The quick fox");
   });
-});
+  
 
 describe("generateInitials", () => {
   test("returns the initials of a firstname and surname", () => {
     expect(generateInitials("Frederic", "Bonneville")).toBe("F.B");
   });
+});
 });
 
 describe("addVAT", () => {

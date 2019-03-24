@@ -1,12 +1,17 @@
 function capitalize(word) {
   if (word === undefined) throw new Error("word is required");
   // Add your code here!
+  var firstCapLetter = word.charAt(0).toUpperCase() + word.slice(1);
+  return firstCapLetter;  
 }
 
 function generateInitials(firstName, lastName) {
   if (firstName === undefined) throw new Error("firstName is required");
   if (lastName === undefined) throw new Error("lastName is required");
   // Add your code here!
+ var genarateInitials = firstName.charAt(0).toUpperCase() + "." + lastName.charAt(0).toUpperCase();
+ return genarateInitials;
+
 }
 
 function addVAT(originalPrice, vatRate) {
