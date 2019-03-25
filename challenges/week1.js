@@ -1,6 +1,5 @@
 function capitalize(word) {
   if (word === undefined) throw new Error("word is required");
-  // Add your code here!
   var firstCapLetter = word.charAt(0).toUpperCase() + word.slice(1);
   return firstCapLetter;  
 }
@@ -8,8 +7,7 @@ function capitalize(word) {
 function generateInitials(firstName, lastName) {
   if (firstName === undefined) throw new Error("firstName is required");
   if (lastName === undefined) throw new Error("lastName is required");
-  // Add your code here!
- var genarateInitials = firstName.charAt(0).toUpperCase() + "." + lastName.charAt(0).toUpperCase();
+  var genarateInitials = firstName.charAt(0).toUpperCase() + "." + lastName.charAt(0).toUpperCase();
  return genarateInitials;
 
 }
@@ -17,7 +15,6 @@ function generateInitials(firstName, lastName) {
 function addVAT(originalPrice, vatRate) {
   if (originalPrice === undefined) throw new Error("originalPrice is requied");
   if (vatRate === undefined) throw new Error("vatRate is required");
-  // Add your code here!
   const addVatToTotal =  (originalPrice /100 ) * vatRate ;
   const totalAmt = originalPrice + addVatToTotal;
   return Number.isInteger(totalAmt)? totalAmt : +totalAmt.toFixed(2);
@@ -27,7 +24,6 @@ function addVAT(originalPrice, vatRate) {
 function getSalePrice(originalPrice, reduction) {
   if (originalPrice === undefined) throw new Error("originalPrice is required");
   if (reduction === undefined) throw new Error("reduction is required");
-  // Add your code here!
   const reducePrice =  (originalPrice/100) * reduction;
   const totalAmtReduce = originalPrice - reducePrice;
   return Number.isInteger(totalAmtReduce)? totalAmtReduce : +totalAmtReduce.toFixed(2);
@@ -45,12 +41,18 @@ function getMiddleCharacter(str) {
 
 function reverseWord(word) {
   if (word === undefined) throw new Error("word is required");
-  // Add your code here!
+  return word.split("").reverse().join('');
+   
 }
 
 function reverseAllWords(words) {
   if (words === undefined) throw new Error("words is required");
-  // Add your code here!
+  var reverseWords = [];
+  words.forEach(element => {
+    reverseWords.push(reverseWord(element));
+  });
+  
+  return reverseWords;
 }
 
 function countLinuxUsers(users) {
