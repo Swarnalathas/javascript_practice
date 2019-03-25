@@ -57,17 +57,32 @@ function reverseAllWords(words) {
 
 function countLinuxUsers(users) {
   if (users === undefined) throw new Error("users is required");
-  // Add your code here!
+   return users.filter(element => {
+              return (element.type === 'Linux');
+          }).length;
 }
 
 function getMeanScore(scores) {
   if (scores === undefined) throw new Error("scores is required");
-  // Add your code here!
+  var totalScores = 0;
+  scores.forEach(element => {
+    totalScores = totalScores + element;
+  });
+  var meanScore = totalScores/scores.length;
+
+  return Number.isInteger(meanScore)? meanScore : +meanScore.toFixed(2);
 }
 
 function simpleFizzBuzz(n) {
   if (n === undefined) throw new Error("n is required");
-  // Add your code here!
+  if ((n % 3 === 0) && (n % 5 === 0)){
+    return "fizzbuzz";
+  } else if (n % 3 === 0) {
+    return "fizz";
+  } else if (n % 5 === 0) {
+    return "buzz";
+  }
+  return n;
 }
 
 module.exports = {
