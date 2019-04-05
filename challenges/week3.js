@@ -48,7 +48,26 @@ function checkIngredients(menu, ingredient) {
 function duplicateNumbers(arr1, arr2) {
   if (!arr1) throw new Error("arr1 is required");
   if (!arr2) throw new Error("arr2 is required");
-  // Your code here!
+  let removeDuplicateItem1 = removeDuplicate(arr1);
+  let removeDuplicateItem2 = removeDuplicate(arr2);
+  let duplicateNum = [];
+  removeDuplicateItem1.forEach((element1) => removeDuplicateItem2.forEach(element2 => {
+    if (element1 === element2) {
+      duplicateNum.push(element1);
+    }
+  })
+  );
+  return duplicateNum.sort();
+}
+
+function removeDuplicate(array) {
+  let removeDuplicate = [];
+  array.forEach(element => {
+    if (!removeDuplicate.includes(element)) {
+      removeDuplicate.push(element);
+    }
+  });
+  return removeDuplicate;
 }
 
 module.exports = {
