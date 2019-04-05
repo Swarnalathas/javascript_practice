@@ -1,7 +1,12 @@
 function getSquares(nums) {
   if (!nums) throw new Error("nums is required");
-  // Your code here!
-}
+    let numSquare = [];
+    nums.forEach(element =>{   
+      return numSquare.push(Math.pow(element, 2));
+    });
+    return numSquare;
+  }
+
 
 function camelCaseWords(words) {
   if (!words) throw new Error("words is required");
