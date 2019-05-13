@@ -72,7 +72,7 @@ describe("arrShift", () => {
   test("returns an array with the first and last items swapped", () => {
     expect(arrShift([1, 2])).toEqual([2, 1]);
     expect(arrShift([1, 2, 3])).toEqual([3, 2, 1]);
-    expect(arrShift([1, 2, 3, 4])).toEqual([4, 2, 3, 1]);
+    expect(arrShift([1, 2, 3, 4])).toEqual([4, 3, 2, 1]);
   });
 
   test("makes no difference when the array length is < 2", () => {
@@ -82,7 +82,7 @@ describe("arrShift", () => {
 });
 
 describe("findNeedle", () => {
-  test("returns true if any of the properties of an object contain the specified string", () => {
+  test("returns true if any of the ", () => {
     const obj1 = {
       name: "LINNMON",
       description: "Small round table",
