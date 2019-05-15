@@ -55,17 +55,21 @@ const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
 
-  let objectsAreSame = false;
+  searchTerm = searchTerm.toLowerCase();
+
   for (let propertyName in haystack) {
-    let splitStr = haystack[propertyName].toString().split(' ');
-    splitStr.map(element => {
-      let regexp = new RegExp(searchTerm, 'i');
-      if (regexp.test(element)) {
-        objectsAreSame = true;
+    const propertyValue = haystack[propertyName];
+
+    if (typeof propertyValue === "string") {
+
+      if (propertyValue.toLowerCase().includes(searchTerm)) {
+
+        return true;
       }
-    });
+    }
+
   }
-  return objectsAreSame;
+  return false;
 };
 
 const getWordFrequencies = str => {
@@ -73,7 +77,7 @@ const getWordFrequencies = str => {
 
   str = str.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase();
 
-  let wordFrequencies = str.toString().split(' ');
+  let wordFrequencies = str.split(' ');
 
   const frequencies = {};
   for (let i = 0; i < wordFrequencies.length; i++) {
