@@ -3,7 +3,8 @@ const {
     isValidDNA,
     getComplementaryDNA,
     isItPrime,
-    createMatrix
+    createMatrix,
+    areWeCovered
 
 } = require("../challenges/week9");
 
@@ -18,10 +19,10 @@ describe("sumMultiples", () => {
         expect(() => {
             sumMultiples(456);
         }).toThrow("arr is required");
-        
+
         expect(() => {
             sumMultiples("Hello");
-        }).toThrow("arr is required");  
+        }).toThrow("arr is required");
     });
 
     test("return the sum of any numbers which are a multiple of 3 or 5 ", () => {
@@ -41,16 +42,16 @@ describe("isValidDNA", () => {
     test("check the value of str is not empty", () => {
         expect(() => {
             isValidDNA("");
-        }).toThrow("str is required");         
+        }).toThrow("str is required");
     });
 
     test("Check the value of str is not number or array", () => {
         expect(() => {
             isValidDNA(123);
-        }).toThrow("String is requried");  
+        }).toThrow("String is requried");
         expect(() => {
             isValidDNA(["ACG"]);
-        }).toThrow("String is requried");         
+        }).toThrow("String is requried");
     });
 
     test("return true if any of the value of C, G, T or A only in the String", () => {
@@ -58,7 +59,7 @@ describe("isValidDNA", () => {
         expect(isValidDNA("GTAA")).toBe(true);
         expect(isValidDNA("TACC")).toBe(true);
     });
-    
+
 
     test("return false if any of the value of C, G, T or A not in the String", () => {
         expect(isValidDNA("XYZA")).toBe(false);
@@ -73,22 +74,22 @@ describe("getComplementaryDNA", () => {
     test("check the value of str is not empty", () => {
         expect(() => {
             getComplementaryDNA("");
-        }).toThrow("str is required");         
+        }).toThrow("str is required");
     });
 
     test("Check the value of str is not number or array", () => {
         expect(() => {
             getComplementaryDNA(123);
-        }).toThrow("String is requried");  
+        }).toThrow("String is requried");
         expect(() => {
             isValidDNA(["ACG"]);
-        }).toThrow("String is requried");         
+        }).toThrow("String is requried");
     });
 
     test("Check the value of str is combination of DNA pairs", () => {
         expect(() => {
             getComplementaryDNA("ATXY");
-        }).toThrow("String should be combination of Valid DNA Pairs");               
+        }).toThrow("String should be combination of Valid DNA Pairs");
     });
 
     test("return Complementary base DNA", () => {
@@ -96,45 +97,81 @@ describe("getComplementaryDNA", () => {
         expect(getComplementaryDNA("GTAA")).toBe("CATT");
         expect(getComplementaryDNA("TACC")).toBe("ATGG");
     });
- 
+
 });
 
-describe("isItPrime",()=> {
+describe("isItPrime", () => {
     test("check the Number is not empty", () => {
         expect(() => {
             isItPrime();
-        }).toThrow("n is required");         
+        }).toThrow("n is required");
     });
 
     test("return true if the given number is prime Number", () => {
         expect(isItPrime(2)).toBe(true);
-        expect(isItPrime(17)).toBe(true);              
+        expect(isItPrime(17)).toBe(true);
     });
 
     test("return false if the given number is not prime Number", () => {
         expect(isItPrime(9)).toBe(false);
-        expect(isItPrime(66)).toBe(false);              
+        expect(isItPrime(66)).toBe(false);
     });
 
 });
 
-describe("createMatrix",() => {
+describe("createMatrix", () => {
     test("check the number is not empty", () => {
         expect(() => {
             createMatrix();
-        }).toThrow("n is required");         
+        }).toThrow("n is required");
     });
 
     test("Check the fill value is not empty", () => {
         expect(() => {
-            createMatrix(4,"");
-        }).toThrow("fill is required");  
-               
+            createMatrix(4, "");
+        }).toThrow("fill is required");
+
     });
     test("return an array of n arrays,each filled with n items", () => {
-        expect(createMatrix(2,"foo")).toEqual([ [ 'foo', 'foo' ], [ 'foo', 'foo' ] ]);
-        expect(createMatrix(3,"XYZ")).toEqual([ [ 'XYZ', 'XYZ', 'XYZ' ],[ 'XYZ', 'XYZ', 'XYZ' ],[ 'XYZ', 'XYZ', 'XYZ' ] ]);
-        expect(createMatrix(3,33)).toEqual([ [ 33, 33, 33 ], [ 33, 33, 33 ], [ 33, 33, 33 ] ]);
+        expect(createMatrix(2, "foo")).toEqual([['foo', 'foo'], ['foo', 'foo']]);
+        expect(createMatrix(3, "XYZ")).toEqual([['XYZ', 'XYZ', 'XYZ'], ['XYZ', 'XYZ', 'XYZ'], ['XYZ', 'XYZ', 'XYZ']]);
+        expect(createMatrix(3, 33)).toEqual([[33, 33, 33], [33, 33, 33], [33, 33, 33]]);
     });
 
+});
+
+describe("areWeCovered", () => {
+    test("return false if there is no staff at all", () => {
+        expect(areWeCovered([], "Monday")).toBe(false);    
+        expect(areWeCovered([], "Sunday")).toBe(false);
+        expect(areWeCovered([], "Wednesday")).toBe(false);  
+
+    }); 
+
+    test("return flase if there is less than 3 staff are schedule to work", () => {
+        const staff = [
+            { name: "Sally", rota: ["Tuesday", "Friday","Wednesday"] },
+            { name: "Peter", rota: ["Saturday", "Sunday","Friday"] },
+            { name: "Kipper", rota: ["Sunday", "Tuesday","Monday"] },
+            { name: "Willma", rota: [ "Thursday","Monday"] },
+            { name: "Nadim", rota: [ "Thursday","Wednesdeay"] }
+        ]
+        expect(areWeCovered(staff, "Friday")).toBe(false);
+        expect(areWeCovered(staff, "Sunday")).toBe(false);
+    });
+
+    test("return true if there is 3 staff to work on the single day" ,() => {
+        const staff = [
+            { name: "Sally", rota: ["Tuesday", "Friday","Wednesday"] },
+            { name: "Peter", rota: ["Saturday", "Tuesday","Friday"] },
+            { name: "Kipper", rota: ["Sunday", "Tuesday","Monday","Friday"] },
+            { name: "Willma", rota: ["Friday", "Thursday","Monday"] },
+            { name: "Nadim", rota: ["Friday", "Thursday","Sunday","Wednesday"] },
+            { name: "Kareem", rota: ["Friday", "Thursday","Wednesday"] }
+        ]
+        expect(areWeCovered(staff, "Tuesday")).toBe(true);
+        expect(areWeCovered(staff, "Friday")).toBe(true);
+        expect(areWeCovered(staff, "Wednesday")).toBe(true);
+
+    });
 });
