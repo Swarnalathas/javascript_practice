@@ -73,6 +73,21 @@ const createRange = (start, end, step) => {
 const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
+  let watchedUser = [];
+  users.forEach(element1 => {
+    element1.screenTime.forEach(element => {
+      if (element.date === date) {
+        let watchedmins = 0;
+        for (let appsWatched in element.usage) {
+          watchedmins += element.usage[appsWatched];
+        }
+        if (watchedmins >= 100) {
+          watchedUser.push(element1.username);
+        }
+      }
+    });
+  });
+  return watchedUser;
 };
 
 /**
