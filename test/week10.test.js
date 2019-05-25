@@ -1,7 +1,8 @@
 const {
     sumDigits,
     createRange,
-    getScreentimeAlertList
+    getScreentimeAlertList,
+    hexToRGB
 
 } = require("../challenges/week10");
 
@@ -93,4 +94,18 @@ describe("getScreentimeAlertList", () => {
         expect(getScreentimeAlertList(users, "2019-05-03")).toEqual([]);
     });
 
+});
+
+describe("hexToRGB",() => {
+    test("check the HexDecimal values is not empty",() => {
+        expect(() => {
+            hexToRGB();
+        }).toThrow("hexStr is required");   
+    });
+    
+    test("return the value of RGB Code for the given Hexa Decimal Value",() => {
+        expect(hexToRGB("#FFFFFF")).toBe("rgb(255,255,255)");
+        expect(hexToRGB("#ABCDEF")).toBe("rgb(171,205,239)");
+
+    });
 });
